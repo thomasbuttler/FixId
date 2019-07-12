@@ -2,13 +2,15 @@ defmodule FixId.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :fix_id,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     escript: escript(),
-     deps: deps()]
+    [
+      app: :fix_id,
+      version: "0.0.1",
+      elixir: "~> 1.0",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      escript: escript(),
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -23,8 +25,9 @@ defmodule FixId.Mixfile do
 
   def escript do
     [
-     main_module: FixId,
-     emu_args:    "+A32"
+      main_module: FixId,
+      emu_args: "+A32"
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -42,5 +45,4 @@ defmodule FixId.Mixfile do
       {:distillery, "~> 2.0"}
     ]
   end
-
 end

@@ -25,10 +25,10 @@ To Do:
 
 NOTES:
 ------
-* Unless your are doing nothing other than changing a group from one to which
+* Unless one is doing nothing other than changing a group from one to which
 the process belongs to another to which the process belongs, this will need to
 run as root.
-* this will not apply a chown or chgrp to a symlink: the Linux kernel ignores the permissions mode of the symlink itself (thus one does not need to change those permissions), and applying chown to the symlink changes the target of the symlink, which should have complex guardrails.
+* This will not apply a chown or chgrp to a symlink: the Linux kernel ignores the permissions mode of the symlink itself (thus one does not need to change those permissions), and applying chown to the symlink changes the target of the symlink, which should have complex guardrails.
 
 * For cosmetic purposes, it might be nice to apply chown or chgrp to a symbolic
  link, but Elixir does not support lchown
