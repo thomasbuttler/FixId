@@ -10,10 +10,10 @@ Run with:
 ---------
 * mix deps.get
 * iex --erl +A32 -S mix
-* iex(1)> FixId.procdir(".")
+* iex(1)> FixId.get_fixes("tests/ids_file") |> FixId.procdir(".")
 * ...or...
 * mix escript.build
-* ./fix_id .
+* ./fix_id tests/ids_file .
 
 To Do:
 

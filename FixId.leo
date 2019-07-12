@@ -17,14 +17,14 @@
 <v t="tbuttler.20190710030340.1"><vh>main</vh></v>
 <v t="tbuttler.20190710134552.1"><vh>start</vh></v>
 </v>
-<v t="tbuttler.20190709135850.2" a="E"><vh>@clean mix.exs</vh>
+<v t="tbuttler.20190709135850.2"><vh>@clean mix.exs</vh>
 <v t="tbuttler.20190709140050.1"><vh>use Mix.Project</vh></v>
 <v t="tbuttler.20190709140309.1"><vh>project</vh></v>
 <v t="tbuttler.20190709140104.1"><vh>application</vh></v>
 <v t="tbuttler.20190709140113.1"><vh>escript</vh></v>
 <v t="tbuttler.20190709140130.1"><vh>deps</vh></v>
 </v>
-<v t="tbuttler.20190712124300.1"><vh>@clean README.md</vh>
+<v t="tbuttler.20190712124300.1" a="E"><vh>@clean README.md</vh>
 <v t="tbuttler.20190712124300.2"><vh>FixId</vh></v>
 </v>
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
@@ -349,10 +349,10 @@ Run with:
 ---------
 * mix deps.get
 * iex --erl +A32 -S mix
-* iex(1)&gt; FixId.procdir(".")
+* iex(1)&gt; FixId.get_fixes("tests/ids_file") |&gt; FixId.procdir(".")
 * ...or...
 * mix escript.build
-* ./fix_id .
+* ./fix_id tests/ids_file .
 
 To Do:
 
