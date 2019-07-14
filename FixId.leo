@@ -388,8 +388,9 @@ before_script:
   - sudo useradd -u 5001 tb1
   - sudo tar xvf test/test_data.tar
 script:
-  - sudo -E mix test
-  - sudo ls -lR test/dir | diff -u test/after -
+  - env
+#  - sudo /bin/sh -c "setup environment; mix test"
+#  - sudo ls -lR test/dir | diff -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
