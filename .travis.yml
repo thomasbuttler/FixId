@@ -8,5 +8,10 @@ before_script:
   - sudo tar xvf test/test_data.tar
 script:
   - sudo /bin/bash -c ". test/mix_environment; mix test"
-  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }' | diff -u test/after -
+# the awk removes:
+# * "total" lines - which vary between file system types
+# * sizes from directories - which vary between filesystem types
+# * the date, which tends to change ;-)
+  - sudo ls -lR test/dir | awk '/^total / { next } /^d/ { $5="" } { $6=""; $7=""; $8=""; print }' | diff -u 
+test/after -
 
