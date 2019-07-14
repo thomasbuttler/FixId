@@ -2,3 +2,4 @@ _build
 deps
 mix.lock
 /fix_id
+/test/dir

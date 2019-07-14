@@ -29,7 +29,7 @@
 </v>
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
 <v t="tbuttler.20190714132638.2"><vh>@clean .travis.yml</vh></v>
-<v t="tbuttler.20190714132748.1"><vh>test</vh>
+<v t="tbuttler.20190714132748.1" a="E"><vh>test</vh>
 <v t="tbuttler.20190714132842.2"><vh>@clean FixId_test.exs</vh></v>
 <v t="tbuttler.20190714134406.2"><vh>@clean ids_file</vh></v>
 </v>
@@ -385,6 +385,7 @@ install:
   - mix local.hex --force
   - mix deps.get
   - sudo id
+  - sudo /bin/pwd
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
 </t>
@@ -401,11 +402,10 @@ end
 <t tx="tbuttler.20190714134406.2">@language unknown_language
 uids
 # before after
-# empty list for test not as root
+5000 5001
 gids
 # before after
-# account running test must be member of "after" gid
-976 4121
+5000 5001
 
 </t>
 </tnodes>

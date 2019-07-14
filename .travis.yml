@@ -6,3 +6,4 @@ install:
   - mix local.hex --force
   - mix deps.get
   - sudo id
+  - sudo /bin/pwd
