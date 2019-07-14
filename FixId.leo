@@ -30,6 +30,7 @@
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
 <v t="tbuttler.20190714132638.2"><vh>@clean .travis.yml</vh></v>
 <v t="tbuttler.20190714132748.1" a="E"><vh>test</vh>
+<v t="tbuttler.20190714155244.1"><vh>@clean mix_environment</vh></v>
 <v t="tbuttler.20190714132842.2"><vh>@clean FixId_test.exs</vh></v>
 <v t="tbuttler.20190714134406.2"><vh>@clean ids_file</vh></v>
 </v>
@@ -389,8 +390,8 @@ before_script:
   - sudo tar xvf test/test_data.tar
 script:
   - env
-#  - sudo /bin/sh -c "setup environment; mix test"
-#  - sudo ls -lR test/dir | diff -u test/after -
+  - sudo /bin/bash -c ". test/mix_environment; mix test"
+  - sudo ls -lR test/dir | diff -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
@@ -413,6 +414,25 @@ gids
 # before after
 5000 5001
 
+</t>
+<t tx="tbuttler.20190714155244.1">export ELIXIR_VERSION=1.6
+export LC_ALL=en_US.UTF-8
+export MIX_ARCHIVES=/home/travis/.kiex/mix/elixir-1.6
+export ANSI_RESET=\033[0m
+export _KERL_SAVED_REBAR_PLT_DIR=
+export Werror=format-security
+export PATH=/home/travis/.kiex/elixirs/elixir-1.6/bin:/home/travis/otp/19.0/bin:/home/travis/bin:/home/travis/.local/bin:/home/travis/.kiex/elixirs/elixir-1.3.2/bin:/home/travis/.kiex/bin:$PATH
+export LANG=en_US.UTF-8
+export MERB_ENV=test
+export TZ=UTC
+export HOME=/home/travis
+export ANSI_CLEAR=\033[0K
+export REBAR_PLT_DIR=/home/travis/otp/19.0
+export LOGNAME=travis
+export LC_CTYPE=en_US.UTF-8
+export _KERL_ACTIVE_DIR=/home/travis/otp/19.0
+export ANSI_RED=\033[31;1m
+export _KERL_MANPATH_REMOVABLE=/home/travis/otp/19.0/lib/erlang/man:/home/travis/otp/19.0/man
 </t>
 </tnodes>
 </leo_file>

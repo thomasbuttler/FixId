@@ -8,6 +8,6 @@ before_script:
   - sudo tar xvf test/test_data.tar
 script:
   - env
-#  - sudo /bin/sh -c "setup environment; mix test"
-#  - sudo ls -lR test/dir | diff -u test/after -
+  - sudo /bin/bash -c ". test/mix_environment; mix test"
+  - sudo ls -lR test/dir | diff -u test/after -
 
