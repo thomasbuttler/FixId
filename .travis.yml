@@ -9,5 +9,5 @@ before_script:
 script:
   - env
   - sudo /bin/bash -c ". test/mix_environment; mix test"
-  - sudo ls -lR test/dir | diff -u test/after -
+  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }'
 

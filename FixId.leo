@@ -391,7 +391,7 @@ before_script:
 script:
   - env
   - sudo /bin/bash -c ". test/mix_environment; mix test"
-  - sudo ls -lR test/dir | diff -u test/after -
+  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }'
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
