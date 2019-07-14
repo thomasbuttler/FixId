@@ -390,7 +390,7 @@ before_script:
   - sudo tar xvf test/test_data.tar
 script:
   - sudo /bin/bash -c ". test/mix_environment; mix test"
-  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }' | diff -u
+  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }' | diff -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
