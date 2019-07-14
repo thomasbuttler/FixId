@@ -44,7 +44,7 @@ defmodule FixId do
       A line that match none of the preceding patterns gets ignored, but it is
       safer to mark comments with a "# " as the first characters of the line.
   """
-  @spec get_fixes!(String.t()) :: {Map.t(), Map.t()}
+  @spec get_fixes!(String.t()) :: {%{}, %{}}
   def get_fixes!(ids_file) do
     [uids, gids, _] =
       File.stream!(ids_file)
@@ -106,7 +106,7 @@ defmodule FixId do
   use a difference in the major device number of directories to identify a mount point.
   """
 
-  @spec procdir({Map.t(), Map.t()}, String.t()) :: :ok
+  @spec procdir({%{}, %{}}, String.t()) :: :ok
   def procdir({fix_uids, fix_gids}, path_name) do
     {:ok, %File.Stat{major_device: major}} = File.lstat(path_name)
     # accept all

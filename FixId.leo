@@ -17,19 +17,19 @@
 <v t="tbuttler.20190710030340.1"><vh>main</vh></v>
 <v t="tbuttler.20190710134552.1"><vh>start</vh></v>
 </v>
-<v t="tbuttler.20190709135850.2" a="E"><vh>@clean mix.exs</vh>
+<v t="tbuttler.20190709135850.2"><vh>@clean mix.exs</vh>
 <v t="tbuttler.20190709140050.1"><vh>use Mix.Project</vh></v>
 <v t="tbuttler.20190709140309.1"><vh>project</vh></v>
 <v t="tbuttler.20190709140104.1"><vh>application</vh></v>
 <v t="tbuttler.20190709140113.1"><vh>escript</vh></v>
 <v t="tbuttler.20190709140130.1"><vh>deps</vh></v>
 </v>
-<v t="tbuttler.20190712124300.1" a="E"><vh>@clean README.md</vh>
+<v t="tbuttler.20190712124300.1"><vh>@clean README.md</vh>
 <v t="tbuttler.20190712124300.2"><vh>FixId</vh></v>
 </v>
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
 <v t="tbuttler.20190714132638.2"><vh>@clean .travis.yml</vh></v>
-<v t="tbuttler.20190714132748.1" a="E"><vh>test</vh>
+<v t="tbuttler.20190714132748.1"><vh>test</vh>
 <v t="tbuttler.20190714155244.1"><vh>@clean mix_environment</vh></v>
 <v t="tbuttler.20190714132842.2"><vh>@clean FixId_test.exs</vh></v>
 <v t="tbuttler.20190714134406.2"><vh>@clean ids_file</vh></v>
@@ -180,7 +180,7 @@ end
 end
 
 </t>
-<t tx="tbuttler.20190710030422.1">@spec procdir({Map.t(), Map.t()}, String.t()) :: :ok
+<t tx="tbuttler.20190710030422.1">@spec procdir({%{}, %{}}, String.t()) :: :ok
 def procdir({fix_uids, fix_gids}, path_name) do
   {:ok, %File.Stat{major_device: major}} = File.lstat(path_name)
   # accept all
@@ -228,7 +228,7 @@ end
   Supervisor.start_link([], options)
 end
 </t>
-<t tx="tbuttler.20190711193658.1">@spec get_fixes!(String.t()) :: {Map.t(), Map.t()}
+<t tx="tbuttler.20190711193658.1">@spec get_fixes!(String.t()) :: {%{}, %{}}
 def get_fixes!(ids_file) do
   [uids, gids, _] =
     File.stream!(ids_file)
