@@ -398,9 +398,9 @@ script:
 # the awk removes:
 # * "total" lines - which vary between file system types
 # * sizes from directories - which vary between filesystem types
+# * GNU "extra permissions" indicator (. or +) at the end of the mode line
 # * the date, which tends to change ;-)
-  - sudo ls -lR test/dir | awk '/^total / { next } /^d/ { $5="" } { $6=""; $7=""; $8=""; print }' | diff -u 
-test/after -
+  - sudo ls -lR test/dir | awk '/^total / { next } /^d/ { $5="" } { gsub(/[.+]/,"",$1);$6=""; $7=""; $8=""; print }' | diff -b -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
