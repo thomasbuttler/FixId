@@ -10,14 +10,14 @@
 <find_panel_settings/>
 <vnodes>
 <v t="tbuttler.20190709141000.1" a="E"><vh>@clean lib/fix_id.ex</vh>
-<v t="tbuttler.20190712033944.1"><vh>get_fixes documentation</vh></v>
-<v t="tbuttler.20190711193658.1"><vh>get_fixes</vh></v>
+<v t="tbuttler.20190712033944.1"><vh>get_fixes! documentation</vh></v>
+<v t="tbuttler.20190711193658.1"><vh>get_fixes!</vh></v>
 <v t="tbuttler.20190712034208.1"><vh>procdir documentation</vh></v>
 <v t="tbuttler.20190710030422.1"><vh>procdir</vh></v>
 <v t="tbuttler.20190710030340.1"><vh>main</vh></v>
 <v t="tbuttler.20190710134552.1"><vh>start</vh></v>
 </v>
-<v t="tbuttler.20190709135850.2"><vh>@clean mix.exs</vh>
+<v t="tbuttler.20190709135850.2" a="E"><vh>@clean mix.exs</vh>
 <v t="tbuttler.20190709140050.1"><vh>use Mix.Project</vh></v>
 <v t="tbuttler.20190709140309.1"><vh>project</vh></v>
 <v t="tbuttler.20190709140104.1"><vh>application</vh></v>
@@ -75,7 +75,8 @@ end
 defp deps do
   [
     {:parallel_tree_walk, git: "https://github.com/thomasbuttler/ParallelTreeWalk.git"},
-    {:distillery, "~&gt; 2.0"}
+    {:distillery, "~&gt; 2.0"},
+    {:dialyxir, "~&gt; 0.5.0", only: [:dev], runtime: false}
   ]
 end
 </t>
@@ -166,7 +167,7 @@ end
 
     case others do
       [] -&gt;
-        get_fixes(ids_file)
+        get_fixes!(ids_file)
         |&gt; procdir(root_directory)
 
       _ -&gt;
@@ -179,7 +180,8 @@ end
 end
 
 </t>
-<t tx="tbuttler.20190710030422.1">def procdir({fix_uids, fix_gids}, path_name) do
+<t tx="tbuttler.20190710030422.1">@spec procdir({Map.t(), Map.t()}, String.t()) :: :ok
+def procdir({fix_uids, fix_gids}, path_name) do
   {:ok, %File.Stat{major_device: major}} = File.lstat(path_name)
   # accept all
   filter_entry = fn _name -&gt; true end
@@ -226,8 +228,8 @@ end
   Supervisor.start_link([], options)
 end
 </t>
-<t tx="tbuttler.20190711193658.1">@spec get_fixes(String.t()) :: Record.t(Map.t(), Map.t())
-def get_fixes(ids_file) do
+<t tx="tbuttler.20190711193658.1">@spec get_fixes!(String.t()) :: {Map.t(), Map.t()}
+def get_fixes!(ids_file) do
   [uids, gids, _] =
     File.stream!(ids_file)
     |&gt; Stream.map(&amp;String.split(&amp;1))
@@ -285,45 +287,48 @@ end
 </t>
 <t tx="tbuttler.20190712033944.1">@raw
   @doc """
-  get_fixes reads the mapping file, and returns a list of two maps, the uid map and the gid map
-
-  ## Parameters
-
-      - ids_file: string specifying the file from which to read uid and gid maps
-
-  ## Examples
-
-      FixId.get_fixes("tests/ids_file")
-      
-      where "tests/ids_file" contains something like
-
-      uids
-      # uid_before uid_after
-      1 2
-      400 500
-      gids
-      # gid_before gid_after
-      1 2
-      600 700
-      
-      A line beginning with the space delimited string "uids" starts collecting
-      mappings from one uid integer to another (the rest of the line is ignored).
-      
-      A line beginning with the space delimited string "gids" starts collecting
-      mappings from one gid integer to another (the rest of the line is ignored).
-      
-      A line with two space separated integers gets interpreted as either a uid or
-      gid mapping.
-      
-      A line with (optional) spaces, "#", a space, and (optional) other
-      content gets ignored (intended to allow comments)
-      
-      A line that match none of the preceding patterns gets ignored, but it is
-      safer to mark comments with a "# " as the first characters of the line.
-  """
 @end_raw
+get_fixes! reads the mapping file, and returns a list of two maps, the uid map and the gid map.
+It can raise an error if there is trouble reading the file name (e.g., it doesn't exist).
+
+## Parameters
+
+    - ids_file: string specifying the file from which to read uid and gid maps
+
+## Examples
+
+    FixId.get_fixes("tests/ids_file")
+    
+    where "tests/ids_file" contains something like
+
+    uids
+    # uid_before uid_after
+    1 2
+    400 500
+    gids
+    # gid_before gid_after
+    1 2
+    600 700
+    
+    A line beginning with the space delimited string "uids" starts collecting
+    mappings from one uid integer to another (the rest of the line is ignored).
+    
+    A line beginning with the space delimited string "gids" starts collecting
+    mappings from one gid integer to another (the rest of the line is ignored).
+    
+    A line with two space separated integers gets interpreted as either a uid or
+    gid mapping.
+    
+    A line with (optional) spaces, "#", a space, and (optional) other
+    content gets ignored (intended to allow comments)
+    
+    A line that match none of the preceding patterns gets ignored, but it is
+    safer to mark comments with a "# " as the first characters of the line.
+"""
 </t>
-<t tx="tbuttler.20190712034208.1">@ """
+<t tx="tbuttler.20190712034208.1">@raw
+  @doc """
+@end_raw
 major device numbers are unique to the file system, and minor numbers are always zero,
 *except* when the file is a device (block or character).  Practically, it means we can
 use a difference in the major device number of directories to identify a mount point.
@@ -407,7 +412,6 @@ defmodule FixIdTest do
   test "run main" do
     assert FixId.main(["test/ids_file", "test/dir"]) == :ok
   end
-
 end
 </t>
 <t tx="tbuttler.20190714134406.2">@language unknown_language

@@ -42,7 +42,8 @@ defmodule FixId.Mixfile do
   defp deps do
     [
       {:parallel_tree_walk, git: "https://github.com/thomasbuttler/ParallelTreeWalk.git"},
-      {:distillery, "~> 2.0"}
+      {:distillery, "~> 2.0"},
+      {:dialyxir, "~> 0.5.0", only: [:dev], runtime: false}
     ]
   end
 end

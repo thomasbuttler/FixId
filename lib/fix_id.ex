@@ -7,7 +7,8 @@ defmodule FixId do
   """
 
   @doc """
-  get_fixes reads the mapping file, and returns a list of two maps, the uid map and the gid map
+  get_fixes! reads the mapping file, and returns a list of two maps, the uid map and the gid map.
+  It can raise an error if there is trouble reading the file name (e.g., it doesn't exist).
 
   ## Parameters
 
@@ -43,8 +44,8 @@ defmodule FixId do
       A line that match none of the preceding patterns gets ignored, but it is
       safer to mark comments with a "# " as the first characters of the line.
   """
-  @spec get_fixes(String.t()) :: Record.t(Map.t(), Map.t())
-  def get_fixes(ids_file) do
+  @spec get_fixes!(String.t()) :: {Map.t(), Map.t()}
+  def get_fixes!(ids_file) do
     [uids, gids, _] =
       File.stream!(ids_file)
       |> Stream.map(&String.split(&1))
@@ -99,11 +100,13 @@ defmodule FixId do
     {uids, gids}
   end
 
-  # major device numbers are unique to the file system, and minor numbers are always zero,
-  # *except* when the file is a device (block or character).  Practically, it means we can
-  # use a difference in the major device number of directories to identify a mount point.
-  # """
-  # 
+  @doc """
+  major device numbers are unique to the file system, and minor numbers are always zero,
+  *except* when the file is a device (block or character).  Practically, it means we can
+  use a difference in the major device number of directories to identify a mount point.
+  """
+
+  @spec procdir({Map.t(), Map.t()}, String.t()) :: :ok
   def procdir({fix_uids, fix_gids}, path_name) do
     {:ok, %File.Stat{major_device: major}} = File.lstat(path_name)
     # accept all
@@ -146,7 +149,7 @@ defmodule FixId do
 
       case others do
         [] ->
-          get_fixes(ids_file)
+          get_fixes!(ids_file)
           |> procdir(root_directory)
 
         _ ->
