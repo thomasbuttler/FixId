@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tbuttler.20190709141000.1" a="E"><vh>@clean lib/fix_id.ex</vh>
+<v t="tbuttler.20190709141000.1"><vh>@clean lib/fix_id.ex</vh>
 <v t="tbuttler.20190712033944.1"><vh>get_fixes documentation</vh></v>
 <v t="tbuttler.20190711193658.1"><vh>get_fixes</vh></v>
 <v t="tbuttler.20190712034208.1"><vh>procdir documentation</vh></v>
@@ -24,12 +24,14 @@
 <v t="tbuttler.20190709140113.1"><vh>escript</vh></v>
 <v t="tbuttler.20190709140130.1"><vh>deps</vh></v>
 </v>
-<v t="tbuttler.20190712124300.1" a="E"><vh>@clean README.md</vh>
+<v t="tbuttler.20190712124300.1"><vh>@clean README.md</vh>
 <v t="tbuttler.20190712124300.2"><vh>FixId</vh></v>
 </v>
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
-<v t="tbuttler.20190711200350.1"><vh>tests</vh>
-<v t="tbuttler.20190711200355.1"><vh>@clean ids_file</vh></v>
+<v t="tbuttler.20190714132638.2"><vh>@clean .travis.yml</vh></v>
+<v t="tbuttler.20190714132748.1"><vh>test</vh>
+<v t="tbuttler.20190714132842.2"><vh>@clean FixId_test.exs</vh></v>
+<v t="tbuttler.20190714134406.2"><vh>@clean ids_file</vh></v>
 </v>
 </vnodes>
 <tnodes>
@@ -228,6 +230,11 @@ def get_fixes(ids_file) do
   [uids, gids, _] =
     File.stream!(ids_file)
     |&gt; Stream.map(&amp;String.split(&amp;1))
+    # comment facility - ignore all but first two elements
+    |&gt; Stream.map(fn
+      [a, b | _] -&gt; [a, b]
+      a -&gt; a
+    end)
     # primitive comment facility
     |&gt; Stream.filter(fn
       ["#" | _] -&gt; false
@@ -262,7 +269,7 @@ def get_fixes(ids_file) do
     )
 
   # sanity checks that no value of uids should appear as a key of uids,
-  # and no key of gids appears as a value of gids
+  # and no value of gids appears as a key of gids
   Enum.each(uids, fn {_key, value} -&gt;
     uids[value] &amp;&amp; raise "Error: circular mapping in uids #{value}"
   end)
@@ -273,17 +280,6 @@ def get_fixes(ids_file) do
 
   {uids, gids}
 end
-
-</t>
-<t tx="tbuttler.20190711200350.1">@path tests
-</t>
-<t tx="tbuttler.20190711200355.1">uids
-# before after
-# empty list for test not as root
-gids
-# before after
-# account running test must be member of "after" gid
-976 4121
 
 </t>
 <t tx="tbuttler.20190712033944.1">@raw
@@ -378,6 +374,38 @@ run as root.
       * linux symlink permission semantic:
         * owner, group, and mode of symlink ignored
         * permission to replace or remove symlink specified by containing directory
+
+</t>
+<t tx="tbuttler.20190714132638.2">@language yaml
+language: elixir
+elixir:
+  - 1.3.4
+install:
+  - mix local.rebar --force
+  - mix local.hex --force
+  - mix deps.get
+  - sudo id
+</t>
+<t tx="tbuttler.20190714132748.1">@path test
+</t>
+<t tx="tbuttler.20190714132842.2">@language unknown_language
+defmodule FixIdTest do
+  use ExUnit.Case
+
+  test "test environment is present" do
+    assert true == true
+  end
+
+end
+</t>
+<t tx="tbuttler.20190714134406.2">@language unknown_language
+uids
+# before after
+# empty list for test not as root
+gids
+# before after
+# account running test must be member of "after" gid
+976 4121
 
 </t>
 </tnodes>

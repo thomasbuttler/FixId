@@ -48,6 +48,11 @@ defmodule FixId do
     [uids, gids, _] =
       File.stream!(ids_file)
       |> Stream.map(&String.split(&1))
+      # comment facility - ignore all but first two elements
+      |> Stream.map(fn
+        [a, b | _] -> [a, b]
+        a -> a
+      end)
       # primitive comment facility
       |> Stream.filter(fn
         ["#" | _] -> false
@@ -82,7 +87,7 @@ defmodule FixId do
       )
 
     # sanity checks that no value of uids should appear as a key of uids,
-    # and no key of gids appears as a value of gids
+    # and no value of gids appears as a key of gids
     Enum.each(uids, fn {_key, value} ->
       uids[value] && raise "Error: circular mapping in uids #{value}"
     end)
