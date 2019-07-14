@@ -15,6 +15,8 @@ Run with:
 * mix escript.build
 * ./fix_id tests/ids_file .
 
+Test Status: [![Build Status](https://travis-ci.org/thomasbuttler/FixId.svg?branch=master)](https://travis-ci.org/thomasbuttler/FixId)
+
 To Do:
 
 * improve @moduledoc, @doc

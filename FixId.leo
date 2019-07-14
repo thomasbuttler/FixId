@@ -24,7 +24,7 @@
 <v t="tbuttler.20190709140113.1"><vh>escript</vh></v>
 <v t="tbuttler.20190709140130.1"><vh>deps</vh></v>
 </v>
-<v t="tbuttler.20190712124300.1"><vh>@clean README.md</vh>
+<v t="tbuttler.20190712124300.1" a="E"><vh>@clean README.md</vh>
 <v t="tbuttler.20190712124300.2"><vh>FixId</vh></v>
 </v>
 <v t="tbuttler.20190709143225.2"><vh>@clean rel/config.exs</vh></v>
@@ -350,6 +350,8 @@ Run with:
 * mix escript.build
 * ./fix_id tests/ids_file .
 
+Test Status: [![Build Status](https://travis-ci.org/thomasbuttler/FixId.svg?branch=master)](https://travis-ci.org/thomasbuttler/FixId)
+
 To Do:
 
 * improve @moduledoc, @doc
@@ -379,13 +381,7 @@ run as root.
 <t tx="tbuttler.20190714132638.2">@language yaml
 language: elixir
 elixir:
-  - 1.3.4
-install:
-  - mix local.rebar --force
-  - mix local.hex --force
-  - mix deps.get
-  - sudo id
-  - sudo /bin/pwd
+  - 1.6
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
 </t>
