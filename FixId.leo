@@ -386,7 +386,7 @@ elixir:
 before_script:
   - sudo useradd -u 5000 tb0
   - sudo useradd -u 5001 tb1
-  - sudo tar xvf test/test-data.tar
+  - sudo tar xvf test/test_data.tar
 script:
   - sudo mix test
   - sudo ls -lR test/dir | diff -u test/after -
