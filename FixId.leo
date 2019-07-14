@@ -399,8 +399,7 @@ script:
 # * "total" lines - which vary between file system types
 # * sizes from directories - which vary between filesystem types
 # * the date, which tends to change ;-)
-  - sudo ls -lR test/dir | awk '/^total / { next } /^d/ { $5="" } { $6=""; $7=""; $8=""; print }' | diff -u 
-test/after -
+  - sudo ls -lR test/dir | awk '/^total / { next } /^d/ { $5="" } { $6=""; $7=""; $8=""; print }' | diff -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
