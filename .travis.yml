@@ -7,7 +7,6 @@ before_script:
   - sudo useradd -u 5001 tb1
   - sudo tar xvf test/test_data.tar
 script:
-  - env
   - sudo /bin/bash -c ". test/mix_environment; mix test"
-  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }'
+  - sudo ls -lR test/dir | awk '/^total / { next } { $6=""; $7=""; $8=""; print }' | diff -u
 
