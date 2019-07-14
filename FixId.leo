@@ -383,6 +383,10 @@ service: docker
 language: elixir
 elixir:
   - 1.6
+before_script:
+  - sudo id -a
+  - sudo /bin/pwd
+
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
 </t>

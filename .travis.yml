@@ -2,3 +2,7 @@ service: docker
 language: elixir
 elixir:
   - 1.6
+before_script:
+  - sudo id -a
+  - sudo /bin/pwd
+
