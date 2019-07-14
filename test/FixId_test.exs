@@ -1,8 +1,8 @@
 defmodule FixIdTest do
   use ExUnit.Case
 
-  test "test environment is present" do
-    assert true == true
+  test "run main" do
+    assert FixId.main(["test/ids_file", "test/dir"]) == ok
   end
 
 end

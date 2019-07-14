@@ -1,0 +1,20 @@
+test/dir:
+total 0
+-rw-rw-r--. 1 tb1 tb1  0 Jul 14 15:21 a.txt
+lrwxrwxrwx. 1 tb0 tb0 11 Jul 14 13:25 badlink -> ./not_there
+-rw-rw-r--. 1 tb1 tb1  0 Jul 14 15:21 b.txt
+dr-x------. 3 tb1 tb1 14 Jul 14 15:21 c
+lrwxrwxrwx. 1 tb0 tb0  1 Jul 14 13:25 dirlink -> c
+lrwxrwxrwx. 1 tb0 tb0  7 Jul 14 13:25 goodlink -> ./a.txt
+
+test/dir/c:
+total 0
+drwxrwxr-x. 3 tb1 tb1 26 Jul 14 15:21 d
+
+test/dir/c/d:
+total 0
+drwxrwxr-x. 2 tb1 tb1 6 Jul 14 15:21 e
+-rw-rw-r--. 1 tb1 tb1 0 Jul 14 15:21 f.txt
+
+test/dir/c/d/e:
+total 0

@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="tbuttler.20190709141000.1"><vh>@clean lib/fix_id.ex</vh>
+<v t="tbuttler.20190709141000.1" a="E"><vh>@clean lib/fix_id.ex</vh>
 <v t="tbuttler.20190712033944.1"><vh>get_fixes documentation</vh></v>
 <v t="tbuttler.20190711193658.1"><vh>get_fixes</vh></v>
 <v t="tbuttler.20190712034208.1"><vh>procdir documentation</vh></v>
@@ -384,8 +384,12 @@ language: elixir
 elixir:
   - 1.6
 before_script:
-  - sudo id -a
-  - sudo /bin/pwd
+  - sudo useradd -u 5000 tb0
+  - sudo useradd -u 5001 tb1
+  - sudo tar xvf test/test-data.tar
+script:
+  - sudo mix test
+  - sudo ls -lR test/dir | diff -u test/after -
 
 </t>
 <t tx="tbuttler.20190714132748.1">@path test
@@ -394,8 +398,8 @@ before_script:
 defmodule FixIdTest do
   use ExUnit.Case
 
-  test "test environment is present" do
-    assert true == true
+  test "run main" do
+    assert FixId.main(["test/ids_file", "test/dir"]) == ok
   end
 
 end
