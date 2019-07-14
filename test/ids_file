@@ -1,8 +1,7 @@
 uids
 # before after
-# empty list for test not as root
+5000 5001
 gids
 # before after
-# account running test must be member of "after" gid
-976 4121
+5000 5001
 
