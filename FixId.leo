@@ -379,6 +379,7 @@ run as root.
 
 </t>
 <t tx="tbuttler.20190714132638.2">@language yaml
+service: docker
 language: elixir
 elixir:
   - 1.6

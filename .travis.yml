@@ -1,3 +1,4 @@
+service: docker
 language: elixir
 elixir:
   - 1.6
