@@ -392,6 +392,7 @@ elixir:
 before_script:
   - sudo useradd -u 5000 tb0
   - sudo useradd -u 5001 tb1
+  - sudo useradd -u 5002 tb2
   - sudo tar xvf test/test_data.tar
 script:
   - sudo /bin/bash -c ". test/mix_environment; mix test"

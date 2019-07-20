@@ -5,6 +5,15 @@ lrwxrwxrwx 1 tb0 tb0 11    badlink -> ./not_there
 dr-x------ 3 tb1 tb1     c
 lrwxrwxrwx 1 tb0 tb0 1    dirlink -> c
 lrwxrwxrwx 1 tb0 tb0 7    goodlink -> ./a.txt
+-rw-r--r-- 1 tb1 tb1 0    utb0_gtb0
+-rw-r--r-- 1 tb1 tb1 0    utb0_gtb1
+-rw-r--r-- 1 tb1 tb2 0    utb0_gtb2
+-rw-r--r-- 1 tb1 tb1 0    utb1_gtb0
+-rw-r--r-- 1 tb1 tb1 0    utb1_gtb1
+-rw-r--r-- 1 tb1 tb2 0    utb1_gtb2
+-rw-r--r-- 1 tb2 tb1 0    utb2_gtb0
+-rw-r--r-- 1 tb2 tb1 0    utb2_gtb1
+-rw-r--r-- 1 tb2 tb2 0    utb2_gtb2
        
 test/dir/c:       
 drwxrwxr-x 3 tb1 tb1     d
